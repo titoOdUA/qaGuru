@@ -82,7 +82,7 @@ public class PracticeFormTests {
         $("#currentAddress").setValue(currentAddress);
         $("#state").find("input").setValue(state).pressEnter();
         $("#city").find("input").setValue(city).pressEnter();
-        $("#uploadPicture").uploadFile(new File("./" + fileName));
+        $("#uploadPicture").uploadFile(new File("./src/test/resources/" + fileName));
         $("#submit").scrollTo().click();
     }
 }
