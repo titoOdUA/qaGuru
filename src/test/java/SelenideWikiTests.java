@@ -1,14 +1,13 @@
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
-public class PracticeFormTests {
+public class SelenideWikiTests {
 
     @BeforeAll
     static void setup() {
@@ -17,13 +16,13 @@ public class PracticeFormTests {
     }
 
     @Test
-    void checkFormSubmit() {
+    void checkSelenideWikiContainsJunit5AssertionsBlock() {
         open("selenide/selenide");
         $("#wiki-tab").click();
-        $("#wiki-body").$(byText("Soft assertions")).click();
+        $("#wiki-pages-box").$(byText("Show 2 more pages…")).click();
+        $("#wiki-pages-box").$(byText("SoftAssertions")).click();
         $("#wiki-body").$$("ol")
                 .findBy(text("Using JUnit5"))
-                .shouldBe(visible)
                 .sibling(0).shouldHave(text("@ExtendWith"));
     }
 }
