@@ -8,11 +8,12 @@ repositories {
 
 dependencies {
     testImplementation(
+            'com.github.javafaker:javafaker:1.0.2',
             "com.codeborne:selenide:5.22.2",
             "org.junit.jupiter:junit-jupiter:5.7.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
-}
 
+}
 test {
     useJUnitPlatform()
 }
