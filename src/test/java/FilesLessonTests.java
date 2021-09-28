@@ -1,5 +1,7 @@
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -41,5 +43,13 @@ public class FilesLessonTests {
                 .getStringCellValue())
                 .isEqualTo("allo.ua");
         assertThat(file.excel.getNumberOfSheets()).isEqualTo(1);
+    }
+
+    @Test
+    void parseZipFile() throws ZipException {
+        ZipFile file = new ZipFile(getClass().getClassLoader().getResource("filesArchive.zip").getFile());
+        assertThat(file.isValidZipFile()).isTrue();
+        file.setPassword("1111");
+        file.extractAll("src/test/resources");
     }
 }
