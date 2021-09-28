@@ -2,8 +2,11 @@ import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +19,7 @@ public class FilesLessonTests {
     void parseTxtFile() throws IOException {
         String result = "";
 
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("file.txt")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("dummy.txt")) {
             if (is != null) {
                 result = new String(is.readAllBytes(), StandardCharsets.UTF_8);
             }
@@ -39,7 +42,7 @@ public class FilesLessonTests {
         XLS file = new XLS(getClass().getClassLoader().getResourceAsStream("dummy.xls"));
         assertThat(file.excel.getSheetAt(0)
                 .getRow(0)
-                .getCell(1)
+                .getCell(0)
                 .getStringCellValue())
                 .isEqualTo("allo.ua");
         assertThat(file.excel.getNumberOfSheets()).isEqualTo(1);
@@ -51,5 +54,16 @@ public class FilesLessonTests {
         assertThat(file.isValidZipFile()).isTrue();
         file.setPassword("1111");
         file.extractAll("src/test/resources");
+    }
+
+    @Test
+    void readDocTest() throws Exception {
+        String expectedString = "Hello world";
+
+        try (FileInputStream fileInputStream = new FileInputStream(getClass().getClassLoader().getResource("dummy.docx").getFile())) {
+            XWPFDocument document = new XWPFDocument(fileInputStream);
+            XWPFWordExtractor extractor = new XWPFWordExtractor(document);
+            assertThat(extractor.getText()).contains(expectedString);
+        }
     }
 }
