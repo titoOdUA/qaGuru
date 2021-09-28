@@ -1,0 +1,5 @@
+This is some text file.
+It is crucial that this file must contain specific names.
+
+Names:
+Bob, Joel, Anne
