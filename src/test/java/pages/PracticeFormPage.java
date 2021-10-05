@@ -22,7 +22,7 @@ public class PracticeFormPage {
         $("#uploadPicture").uploadFile(new File("./src/test/resources/" + fileName));
     }
 
-    @Step("Заполняем форму валидными данными")
+    @Step("Fill up form with valid data")
     public void fillFormWithAllData(String name, String lastName, String email, String phoneNumber,
                                      String monthOfBirth, String yearOfBirth,
                                      String subject, String currentAddress, String state, String city,
@@ -45,7 +45,7 @@ public class PracticeFormPage {
         $("#submit").scrollTo().click();
     }
 
-    @Step("Проверяем корректность заполнения формы")
+    @Step("Assert values in filled form is correct")
     public void checkFilledForm(Map<String, String> expectedFormValues) {
         filledFormPopUp.shouldBe(Condition.visible);
         ElementsCollection formRows = $$x("//div[@class='modal-content']//tbody/tr");
