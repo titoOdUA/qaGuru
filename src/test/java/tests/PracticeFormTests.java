@@ -11,8 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
-public class PracticeFormTests extends BaseTest{
+public class PracticeFormTests extends BaseTest {
 
     Faker faker = new Faker();
     PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -32,7 +33,7 @@ public class PracticeFormTests extends BaseTest{
         String city = "Delhi";
         String fileName = "meme.jpg";
 
-        open(practiceFormPage.urlPart);
+        step("open form page", () -> open(practiceFormPage.urlPart));
 
         //заполняем все поля формы
         practiceFormPage.fillFormWithAllData(name, lastName, email, phoneNumber, monthOfBirth,

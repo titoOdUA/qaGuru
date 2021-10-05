@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import components.DatePickerComponent;
+import io.qameta.allure.Step;
 
 import java.io.File;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class PracticeFormPage {
         $("#uploadPicture").uploadFile(new File("./src/test/resources/" + fileName));
     }
 
+    @Step("Заполняем форму валидными данными")
     public void fillFormWithAllData(String name, String lastName, String email, String phoneNumber,
                                      String monthOfBirth, String yearOfBirth,
                                      String subject, String currentAddress, String state, String city,
@@ -43,6 +45,7 @@ public class PracticeFormPage {
         $("#submit").scrollTo().click();
     }
 
+    @Step("Проверяем корректность заполнения формы")
     public void checkFilledForm(Map<String, String> expectedFormValues) {
         filledFormPopUp.shouldBe(Condition.visible);
         ElementsCollection formRows = $$x("//div[@class='modal-content']//tbody/tr");
